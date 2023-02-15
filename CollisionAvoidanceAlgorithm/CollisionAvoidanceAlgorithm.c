@@ -15,7 +15,7 @@ int* CollisionAvoidanceAlgorithm()
 	LeftFrontRadar   LFR;
 	RightBackRadar   RBR;
 	LeftBackRadar    LBR;
-	if (GetDistanceFrontRadar(RF) == GetForwardDistance(RF))
+	if (GetDistanceFrontRadar(RF) == GetForwardDistance(RF))  /* check for maneuver or braking condition */
 	{
 		if (((GetSafeDistanceLeftBackRadar(LBR)) >= (GetDistanceLeftBackRadar(LBR))) && (GetSafeDistanceLeftFrontRadar(LFR) >= GetDistanceLeftFrontRadar(LFR))) // check to enter manuever process or not 
 		{
@@ -31,9 +31,9 @@ int* CollisionAvoidanceAlgorithm()
 			//}
 			double PassDistance = 
 		}
-		else
+		else  /* if maneuver conditions are not applicable, we will autobrake */
 		{
-			while (GetDistanceFrontRadar(RF) <= GetForwardDistance(RF))
+			while (GetDistanceFrontRadar(RF) <= GetForwardDistance(RF)) /* decelerate until we regain the safe distance between the two cars */
 			{
 				double BrakeF = BrakeForce(RF); // Send it to control team 
 			} 
